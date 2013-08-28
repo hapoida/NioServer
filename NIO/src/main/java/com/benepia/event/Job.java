@@ -3,9 +3,6 @@ package com.benepia.event;
 
 import java.util.Map;
 
-/**
- * @author SongJiHoon
- */
 public class Job {
 	
 	private int eventType;

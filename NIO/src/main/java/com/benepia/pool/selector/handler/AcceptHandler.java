@@ -14,12 +14,13 @@ import java.util.Map;
 import com.benepia.event.Job;
 import com.benepia.event.NIOEvent;
 import com.benepia.queue.Queue;
+import com.benepia.util.CodeConstance;
 
 public class AcceptHandler extends Thread {
 	
 	private Queue queue = null;
 	private Selector selector = null;
-	private int port = 9090;
+	private int port = CodeConstance.serverPort;
 	private String name = "AcceptHandler-";
 	
 	public AcceptHandler(Queue queue, Selector selector, int port, int index) {

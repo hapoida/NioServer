@@ -12,7 +12,7 @@ import java.util.Vector;
 
 import com.benepia.event.Job;
 import com.benepia.event.NIOEvent;
-import com.benepia.queue.ChattingRoom;
+import com.benepia.queue.BcCardServer;
 import com.benepia.queue.Queue;
 
 
@@ -35,7 +35,6 @@ public class RequestHandler extends HandlerAdaptor {
 			while (!Thread.currentThread().isInterrupted()) {
 				processNewConnection();
 				int keysReady = selector.select(1000);	
-				System.out.println("@RequestHandler(" + getName() + ") selected : " + keysReady );	
 				if (keysReady > 0) {
 					processRequest();
 				}
@@ -50,8 +49,7 @@ public class RequestHandler extends HandlerAdaptor {
 		while (iter.hasNext()) {
 			SocketChannel sc = (SocketChannel) iter.next();
 			sc.register(selector, SelectionKey.OP_READ);
-			ChattingRoom.getInstance().add(sc);
-			System.out.println("@RequestHandler(" + getName() + ") success regist : " + sc.toString() );
+			BcCardServer.getInstance().add(sc);
 		}
 		newClients.clear();
 	}

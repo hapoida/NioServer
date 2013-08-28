@@ -17,18 +17,12 @@ public abstract class SelectorPoolAdaptor implements SelectorPoolIF {
 	public abstract void startAll();
 	public abstract void stopAll();
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.SelectorPoolIF#pop()
-	 */
 	public Thread get() {
 		synchronized (monitor) {
 			return (Thread) pool.get( roundRobinIndex++ % size );
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.SelectorPoolIF#push(net.daum.javacafe.pool.handler.SelectorHandlerIF)
-	 */
 	public void put(Thread handler) {
 		synchronized (monitor) {
 			if (handler != null) {
@@ -38,18 +32,12 @@ public abstract class SelectorPoolAdaptor implements SelectorPoolIF {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.SelectorPoolIF#size()
-	 */
 	public int size() {
 		synchronized (monitor) {
 			return pool.size();
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.SelectorPoolIF#isEmpty()
-	 */
 	public boolean isEmpty() {
 		synchronized (monitor) {
 			return pool.isEmpty();

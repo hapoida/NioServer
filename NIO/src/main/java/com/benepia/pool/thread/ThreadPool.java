@@ -50,9 +50,6 @@ public class ThreadPool implements ThreadPoolIF {
 		return thread;
 	}
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.thread.ThreadPoolIF#startAll()
-	 */
 	public void startAll() {
 		synchronized (monitor) {
 			Iterator iter = pool.iterator();
@@ -63,9 +60,6 @@ public class ThreadPool implements ThreadPoolIF {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.thread.ThreadPoolIF#stopAll()
-	 */
 	public void stopAll() {
 		synchronized (monitor) {
 			Iterator iter = pool.iterator();
@@ -78,9 +72,6 @@ public class ThreadPool implements ThreadPoolIF {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.thread.ThreadPoolIF#addThread()
-	 */
 	public void addThread() {
 		synchronized (monitor) {
 			if (current < max) {
@@ -91,9 +82,6 @@ public class ThreadPool implements ThreadPoolIF {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.thread.ThreadPoolIF#removeThread()
-	 */
 	public void removeThread() {
 		synchronized (monitor) {
 			if (current > min) {

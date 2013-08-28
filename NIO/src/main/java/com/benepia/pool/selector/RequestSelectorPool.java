@@ -28,9 +28,6 @@ public class RequestSelectorPool extends SelectorPoolAdaptor {
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.SelectorPoolAdaptor#createHandler(int)
-	 */
 	protected Thread createHandler(int index) {
 		Selector selector = null;
 		try {
@@ -43,9 +40,6 @@ public class RequestSelectorPool extends SelectorPoolAdaptor {
 		return handler;
 	}
 	
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.selector.SelectorPoolIF#startAll()
-	 */
 	public void startAll() {
 		Iterator iter = pool.iterator();
 		while (iter.hasNext()) {
@@ -54,9 +48,6 @@ public class RequestSelectorPool extends SelectorPoolAdaptor {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.selector.SelectorPoolIF#stopAll()
-	 */
 	public void stopAll() {
 		Iterator iter = pool.iterator();
 		while (iter.hasNext()) {

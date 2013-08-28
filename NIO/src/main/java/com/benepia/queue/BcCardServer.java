@@ -1,9 +1,5 @@
 package com.benepia.queue;
 
-/*
- * Created on 2004. 7. 21.
- */
-
 import java.util.Vector;
 
 public class BcCardServer extends Vector {

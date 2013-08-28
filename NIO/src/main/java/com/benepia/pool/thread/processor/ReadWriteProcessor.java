@@ -1,17 +1,23 @@
 package com.benepia.pool.thread.processor;
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
 import java.util.Iterator;
 
+import com.benepia.card.CardSererverService;
+import com.benepia.card.bc.BcCardService;
 import com.benepia.event.Job;
 import com.benepia.event.NIOEvent;
 import com.benepia.pool.PoolManager;
 import com.benepia.pool.buffer.ByteBufferPoolIF;
-import com.benepia.queue.ChattingRoom;
+import com.benepia.queue.BcCardServer;
 import com.benepia.queue.Queue;
 
 
@@ -31,7 +37,7 @@ public class ReadWriteProcessor extends Thread {
 				SocketChannel sc = (SocketChannel) key.channel();
 				
 				try {
-					broadcast(sc);
+					response(sc);
 				} catch (IOException e) {
 					closeChannel(sc);
 				}
@@ -41,37 +47,44 @@ public class ReadWriteProcessor extends Thread {
 		}
 	}
 	
-	private void broadcast(SocketChannel sc) throws IOException {
+	private void response(SocketChannel sc) throws IOException {
+		
 		ByteBufferPoolIF bufferPool = PoolManager.getByteBufferPool();
 		ByteBuffer buffer = null;		
 		try {
+			
+			if(!sc.isConnected() || !sc.isOpen()){
+				throw new Exception();
+			}
+			
 			buffer = bufferPool.getMemoryBuffer();
 			
 			for (int i = 0; i < 2; i++) {
 				sc.read(buffer);
 			}
 			
-			buffer.flip();
+			buffer.clear();
 			
-			Iterator iter = ChattingRoom.getInstance().iterator();
-			while (iter.hasNext()) {
-				SocketChannel member = (SocketChannel) iter.next();
-				if (member != null && member.isConnected()) {
-					while (buffer.hasRemaining()) {
-						member.write(buffer);
-					}
-					buffer.rewind();
-				}
-			}
+			//Business Logic
+			CardSererverService cardSererverService = new BcCardService();
+			String message = cardSererverService.requestToServer(buffer.toString());
+				
+			buffer.put(message.getBytes());
+			buffer.flip();
+
+			sc.write(buffer);
+			
+		} catch(Exception e){
+			
 		} finally {
-			bufferPool.putBuffer(buffer);
+			closeChannel(sc);
 		}		
 	}
 	
 	private void closeChannel(SocketChannel sc) {
 		try {
 			sc.close();
-			ChattingRoom.getInstance().remove(sc);
+			BcCardServer.getInstance().remove(sc);
 		} catch (IOException e) {
 		}
 	}

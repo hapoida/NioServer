@@ -15,8 +15,6 @@ public class PoolManager {
 	
 	private PoolManager() {}
 	
-	
-	
 	public static void registAcceptSelectorPool(SelectorPoolIF selectorPool) {
 		map.put("AcceptSelectorPool", selectorPool);
 	}

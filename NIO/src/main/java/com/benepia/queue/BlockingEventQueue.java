@@ -8,6 +8,10 @@ import com.benepia.event.Job;
 import com.benepia.event.NIOEvent;
 
 
+/**
+ * @author Administrator
+ * Queue 인터페이스의 실제 구현체
+ */
 public class BlockingEventQueue implements Queue {
 
 	private final Object acceptMonitor = new Object();
@@ -30,9 +34,6 @@ public class BlockingEventQueue implements Queue {
 	private BlockingEventQueue() {}
 	
 	
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.queue.Queue#pop(int)
-	 */
 	public Job pop(int eventType) {
 		switch (eventType) {
 			case NIOEvent.ACCEPT_EVENT : return getAcceptJob();
@@ -41,9 +42,6 @@ public class BlockingEventQueue implements Queue {
 		}
 	}
 	
-	/**
-	 * @return
-	 */
 	private Job getAcceptJob() {
 		synchronized (acceptMonitor) {
 			if (acceptQueue.isEmpty()) {
@@ -57,9 +55,6 @@ public class BlockingEventQueue implements Queue {
 		}
 	}
 
-	/**
-	 * @return
-	 */
 	private Job getReadJob() {
 		synchronized (readMonitor) {
 			if (readQueue.isEmpty()) {
@@ -74,9 +69,6 @@ public class BlockingEventQueue implements Queue {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.queue.Queue#push(net.daum.javacafe.event.Job)
-	 */
 	public void push(Job job) {
 		if (job != null) {
 			int eventType = job.getEventType();
@@ -88,9 +80,6 @@ public class BlockingEventQueue implements Queue {
 		}
 	}
 
-	/**
-	 * @param job
-	 */
 	private void putAcceptJob(Job job) {
 		synchronized (acceptMonitor) {
 			acceptQueue.add(job);
@@ -98,9 +87,6 @@ public class BlockingEventQueue implements Queue {
 		}
 	}
 
-	/**
-	 * @param job
-	 */
 	private void putReadJob(Job job) {
 		synchronized (readMonitor) {
 			readQueue.add(job);

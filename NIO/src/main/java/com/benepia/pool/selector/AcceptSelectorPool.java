@@ -7,14 +7,15 @@ import java.util.Iterator;
 
 import com.benepia.pool.selector.handler.AcceptHandler;
 import com.benepia.queue.Queue;
+import com.benepia.util.CodeConstance;
 
 public class AcceptSelectorPool extends SelectorPoolAdaptor {
 	
-	private int port = 9090;
+	private int port = CodeConstance.serverPort;
 	private Queue queue = null;
 	
 	public AcceptSelectorPool(Queue queue) {
-		this(queue, 1, 9090);
+		this(queue, 1, CodeConstance.serverPort);
 	}
 	
 	public AcceptSelectorPool(Queue queue, int size, int port) {
@@ -30,9 +31,6 @@ public class AcceptSelectorPool extends SelectorPoolAdaptor {
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.SelectorPoolAdaptor#createHandler(int)
-	 */
 	protected Thread createHandler(int index) {
 		Selector selector = null;
 		try {
@@ -45,9 +43,6 @@ public class AcceptSelectorPool extends SelectorPoolAdaptor {
 		return handler;
 	}
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.selector.SelectorPoolIF#startAll()
-	 */
 	public void startAll() {
 		Iterator iter = pool.iterator();
 		while (iter.hasNext()) {
@@ -56,9 +51,6 @@ public class AcceptSelectorPool extends SelectorPoolAdaptor {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see net.daum.javacafe.pool.selector.SelectorPoolIF#stopAll()
-	 */
 	public void stopAll() {
 		Iterator iter = pool.iterator();
 		while (iter.hasNext()) {
