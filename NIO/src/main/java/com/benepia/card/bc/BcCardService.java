@@ -1,11 +1,17 @@
 package com.benepia.card.bc;
 
-import com.benepia.card.CardSererverService;
+import com.benepia.card.CardServerAdapter;
 
-public class BcCardService implements CardSererverService{
+public class BcCardService extends CardServerAdapter{
 	
-	public String requestToServer(String massage) {
-		// TODO Auto-generated method stub
-		return "BC에 요청합니다. : 응답완료";
+	public BcCardService(){
+		super();
 	}
+	
+	@Override
+	public String requestToCardServer(String msg) {
+		// BC카드사에 요청을 진행할 내용 작업
+		return (msg + "를 BC카드에 요청 진행 후 완료");
+	}
+	
 }

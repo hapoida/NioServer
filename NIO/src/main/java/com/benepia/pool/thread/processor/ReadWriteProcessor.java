@@ -63,12 +63,12 @@ public class ReadWriteProcessor extends Thread {
 				sc.read(buffer);
 			}
 			
-			buffer.clear();
+//			
 			
 			//Business Logic
 			CardSererverService cardSererverService = new BcCardService();
-			String message = cardSererverService.requestToServer(buffer.toString());
-				
+			String message = cardSererverService.requestToServer(buffer);
+			buffer.clear();
 			buffer.put(message.getBytes());
 			buffer.flip();
 

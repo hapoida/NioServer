@@ -1,5 +1,7 @@
 package com.benepia.card;
 
+import java.nio.ByteBuffer;
+
 public interface CardSererverService {
-	public String requestToServer(String massage);
+	public String requestToServer(ByteBuffer massage);
 }

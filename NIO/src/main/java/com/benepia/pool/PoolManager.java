@@ -31,8 +31,6 @@ public class PoolManager {
 		return (SelectorPoolIF) map.get("RequestSelectorPool");
 	}
 	
-	
-	
 	public static void registByteBufferPool(ByteBufferPoolIF byteBufferPool) {
 		map.put("ByteBufferPool", byteBufferPool);
 	}
