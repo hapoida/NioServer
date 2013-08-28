@@ -15,7 +15,7 @@ import com.benepia.pool.thread.ThreadPoolIF;
 import com.benepia.queue.BlockingEventQueue;
 import com.benepia.queue.Queue;
 
-public class AdvancedChatServer {
+public class AdvancedServer {
 	
 	private Queue queue = null;
 	private SelectorPoolIF acceptSelectorPool = null;
@@ -26,7 +26,7 @@ public class AdvancedChatServer {
 	ThreadPoolIF acceptThreadPool = null;
 	ThreadPoolIF readWriteThreadPool = null;
 	
-	public AdvancedChatServer() {
+	public AdvancedServer() {
 		try {
 			initResource();
 			startServer();
@@ -74,7 +74,7 @@ public class AdvancedChatServer {
 	}
 
 	public static void main(String[] args) {
-		AdvancedChatServer server = new AdvancedChatServer();
+		AdvancedServer server = new AdvancedServer();
 	}
 	
 }
