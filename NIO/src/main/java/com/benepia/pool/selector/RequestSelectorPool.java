@@ -13,7 +13,7 @@ public class RequestSelectorPool extends SelectorPoolAdaptor {
 	private Queue queue = null;
 	
 	public RequestSelectorPool(Queue queue) {
-		this(queue, 2);
+		this(queue, 1);
 	}
 	
 	public RequestSelectorPool(Queue queue, int size) {

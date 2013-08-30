@@ -34,7 +34,7 @@ public class RequestHandler extends HandlerAdaptor {
 		try {
 			while (!Thread.currentThread().isInterrupted()) {
 				processNewConnection();
-				int keysReady = selector.select(1000);	
+				int keysReady = selector.select(1);	
 				if (keysReady > 0) {
 					processRequest();
 				}

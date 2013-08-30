@@ -4,10 +4,6 @@ import com.benepia.card.CardServerAdapter;
 
 public class BcCardService extends CardServerAdapter{
 	
-	public BcCardService(){
-		super();
-	}
-	
 	@Override
 	public String requestToCardServer(String msg) {
 		// BC카드사에 요청을 진행할 내용 작업

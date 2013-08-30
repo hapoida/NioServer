@@ -8,26 +8,12 @@ import java.nio.charset.CharsetDecoder;
 
 public abstract class CardServerAdapter implements CardSererverService{
 	
-	private Charset charset = null;
-	private CharsetDecoder decoder = null;
-	
-	public CardServerAdapter(){
-		charset = Charset.forName("EUC-KR");
-		decoder = charset.newDecoder();
-	}
-	
-	public String requestToServer(ByteBuffer massage) {
+	public String requestToServer(String massage) {
 		
 		String rsltMsg = "";
-			
-		try {
-			massage.flip();
-			String decMsg = decoder.decode(massage).toString();
-			rsltMsg = requestToCardServer(decMsg);
-		} catch (CharacterCodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		rsltMsg = requestToCardServer(massage);
+		
 		return rsltMsg;
 	}
 	

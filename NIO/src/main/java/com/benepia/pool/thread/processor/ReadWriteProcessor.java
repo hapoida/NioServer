@@ -19,11 +19,15 @@ import com.benepia.pool.PoolManager;
 import com.benepia.pool.buffer.ByteBufferPoolIF;
 import com.benepia.queue.BcCardServer;
 import com.benepia.queue.Queue;
+import com.benepia.util.CodeConstance;
 
 
 public class ReadWriteProcessor extends Thread {
 	
 	private Queue queue = null;
+	
+	private static Charset 			charset = Charset.forName(CodeConstance.koEncTyp);
+	private static CharsetDecoder 	decoder = charset.newDecoder();
 	
 	public ReadWriteProcessor(Queue queue) {
 		this.queue = queue;
@@ -35,11 +39,11 @@ public class ReadWriteProcessor extends Thread {
 				Job job = queue.pop(NIOEvent.READ_EVENT);
 				SelectionKey key = (SelectionKey) job.getSession().get("SelectionKey");
 				SocketChannel sc = (SocketChannel) key.channel();
-				
 				try {
 					response(sc);
 				} catch (IOException e) {
 					closeChannel(sc);
+				} finally {
 				}
 			}
 		} catch (Exception e) {
@@ -59,15 +63,14 @@ public class ReadWriteProcessor extends Thread {
 			
 			buffer = bufferPool.getMemoryBuffer();
 			
-			for (int i = 0; i < 2; i++) {
-				sc.read(buffer);
-			}
+			sc.read(buffer);
 			
-//			
+			buffer.flip();
+			String decMsg = decoder.decode(buffer).toString();
 			
 			//Business Logic
 			CardSererverService cardSererverService = new BcCardService();
-			String message = cardSererverService.requestToServer(buffer);
+			String message = cardSererverService.requestToServer(decMsg);
 			buffer.clear();
 			buffer.put(message.getBytes());
 			buffer.flip();
