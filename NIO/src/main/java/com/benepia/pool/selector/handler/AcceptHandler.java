@@ -36,7 +36,7 @@ public class AcceptHandler extends Thread {
 			ServerSocketChannel ssc = ServerSocketChannel.open();
 			ssc.configureBlocking(false);
 			
-			InetSocketAddress address = new InetSocketAddress("localhost", port);
+			InetSocketAddress address = new InetSocketAddress(CodeConstance.serverIp, CodeConstance.serverPort);
 			ssc.socket().bind(address);
 			
 			System.out.println("@AcceptHandler(" + getName() + ") Bound to " + address);

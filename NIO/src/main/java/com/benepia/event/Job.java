@@ -40,4 +40,9 @@ public class Job {
 	public void setEventType(int eventType) {
 		this.eventType = eventType;
 	}
+
+	@Override
+	public String toString() {
+		return "Job [eventType=" + eventType + ", session=" + session + "]";
+	}
 }

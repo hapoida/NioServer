@@ -44,7 +44,7 @@ public class AdvancedServer {
 		bufferFile.deleteOnExit();
 		byteBufferPool = new ByteBufferPool(20*1024, 40*2048, bufferFile);
 		
-		// Queue 생성..
+		// Queue 생성..   
 		queue = BlockingEventQueue.getInstance();		
 		
 		// PoolManager 에 ByteBufferPool 등록..
@@ -61,7 +61,7 @@ public class AdvancedServer {
 		requestSelectorPool = new RequestSelectorPool(queue);
 		
 		// PoolManager 에 SelectorPool 등록..
-		PoolManager.registAcceptSelectorPool(acceptSelectorPool);
+//		PoolManager.registAcceptSelectorPool(acceptSelectorPool);
 		PoolManager.registRequestSelectorPool(requestSelectorPool);	
 	}
 	
@@ -74,6 +74,8 @@ public class AdvancedServer {
 	}
 
 	public static void main(String[] args) {
+		
+		@SuppressWarnings("unused")
 		AdvancedServer server = new AdvancedServer();
 	}
 	

@@ -40,7 +40,13 @@ public class ReadWriteProcessor extends Thread {
 				SelectionKey key = (SelectionKey) job.getSession().get("SelectionKey");
 				SocketChannel sc = (SocketChannel) key.channel();
 				try {
-					response(sc);
+					synchronized(sc){
+						if(sc.isOpen()){
+							System.out.println(key);
+							response(sc);
+						}
+					}
+					
 				} catch (IOException e) {
 					closeChannel(sc);
 				} finally {
@@ -76,6 +82,8 @@ public class ReadWriteProcessor extends Thread {
 			buffer.flip();
 
 			sc.write(buffer);
+			
+			sc.close();
 			
 		} catch(Exception e){
 			
