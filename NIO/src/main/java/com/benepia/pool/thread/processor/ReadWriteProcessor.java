@@ -52,7 +52,7 @@ public class ReadWriteProcessor extends Thread {
 	}
 	
 	private void response(SocketChannel sc) throws IOException {
-		
+		//브런치를 위한 주석추가...
 		ByteBufferPoolIF bufferPool = PoolManager.getByteBufferPool();
 		ByteBuffer buffer = null;		
 		try {
