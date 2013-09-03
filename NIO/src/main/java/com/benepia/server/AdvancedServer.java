@@ -61,7 +61,7 @@ public class AdvancedServer {
 		requestSelectorPool = new RequestSelectorPool(queue);
 		
 		// PoolManager ¿¡ SelectorPool µî·Ï..
-//		PoolManager.registAcceptSelectorPool(acceptSelectorPool);
+		PoolManager.registAcceptSelectorPool(acceptSelectorPool);
 		PoolManager.registRequestSelectorPool(requestSelectorPool);	
 	}
 	
