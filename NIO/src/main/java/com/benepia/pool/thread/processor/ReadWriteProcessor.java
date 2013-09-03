@@ -1,15 +1,11 @@
 package com.benepia.pool.thread.processor;
 
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
-import java.util.Iterator;
 
 import com.benepia.card.CardSererverService;
 import com.benepia.card.bc.BcCardService;
@@ -42,7 +38,6 @@ public class ReadWriteProcessor extends Thread {
 				try {
 					synchronized(sc){
 						if(sc.isOpen()){
-							System.out.println(key);
 							response(sc);
 						}
 					}
