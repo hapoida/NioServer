@@ -8,6 +8,7 @@ public class BcCardService extends CardServerAdapter{
 	public String requestToCardServer(String msg) {
 		// TO-DO BC카드사에 요청을 진행할 내용 작업
 		// 가매작업
+		//해봉매니저가 하세요
 		return (msg + "를 BC카드에 요청 진행 후 완료");
 	}
 	
